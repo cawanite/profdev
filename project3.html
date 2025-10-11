@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+  <title>Project 3 — Programming creature</title>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="site-title">Welcome to My Digital Portfolio</h1>
+      <button class="nav-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="hamburger" aria-hidden="true"></span>
+      </button>
+      <nav id="primary-navigation" class="main-nav" aria-label="Primary">
+        <ul>
+          <li><a href="main.html">Home</a></li>
+          <li><a href="about.html">About me</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="project">
+      <div class="container">
+        <h2>A programming creature making assignment</h2>
+        <div class="project-grid">
+          <div class="project-media">
+            <!-- Embedded YouTube video (default) -->
+            <div class="youtube-embed" style="width:100%;aspect-ratio:16/9;">
+              <iframe src="https://www.youtube.com/embed/CvFyPAnKFmQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;border-radius:8px"></iframe>
+            </div>
+            <!-- fallback/local media -->
+            <img src="assets/project3-placeholder.gif" alt="Project 3 creature" class="project-image" style="display:none">
+            <video src="assets/project3-placeholder.mp4" class="project-video" controls style="display:none"></video>
+          </div>
+          <div class="project-content">
+            <h3>About this project</h3>
+            <p>For this assignment we had to use Processing for the first time, which is a Java-based programming language.</p>
+            <p>We had to make a creature that could move and respond to user input.</p>
+            <p>I made my creature simple by using basic shapes and colors. I wanted it to look cute and friendly.</p>
+            <p>I learned a lot about programming and how to use Processing. It was a fun challenge to make my creature come to life.</p>
+            <p>Overall, I am happy with how my creature turned out and I enjoyed the process of creating it.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 Sacha Brienesse</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>document.addEventListener('DOMContentLoaded', () => window.loadProjectData && window.loadProjectData('project3'));</script>
+</body>
+</html>

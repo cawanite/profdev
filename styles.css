@@ -1,0 +1,715 @@
+/* CSS Variables for consistent color scheme */
+:root {
+    /* Coolors palette: #ffe5ec, #ffc2d1, #ffb3c6, #ff8fab, #fb6f92 */
+    --c-1: #ffe5ec; /* very light */
+    --c-2: #ffc2d1;
+    --c-3: #ffb3c6;
+    --c-4: #ff8fab;
+    --c-5: #fb6f92; /* strongest */
+
+    --primary-pink: var(--c-4);
+    --secondary-pink: var(--c-2);
+    --light-pink: var(--c-1);
+    --dark-pink: var(--c-5);
+    --purple: #9B7EDE; /* keep accent for contrast */
+    --light-purple: #F3E8FF;
+    --blue: #7EC8DE;
+    --light-blue: #FFEEF5;
+    --white: #FFFFFF;
+    --text-dark: #3b2a30;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --transition: all 0.28s ease;
+}
+
+/* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background: linear-gradient(135deg, var(--light-pink) 0%, var(--light-blue) 100%);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header styles */
+.site-header {
+    background-color: var(--primary-pink);
+    padding: 20px 0;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-title {
+    color: var(--white);
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Navigation styles */
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 36px; /* increase spacing between menu items on desktop */
+}
+
+.main-nav a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 10px 24px; /* slightly larger tappable area */
+    font-size: 1.05rem; /* increase readable size */
+    letter-spacing: 0.6px; /* slightly more space between characters */
+    border-radius: 25px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.main-nav a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.main-nav a:hover::before {
+    left: 100%;
+}
+
+.main-nav a:hover {
+    background-color: var(--dark-pink);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Hamburger menu (hidden by default) */
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    position: relative;
+}
+
+.hamburger {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--white);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: background-color 0.28s, opacity 0.28s, transform 0.28s;
+    transform-origin: center;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 3px;
+    background-color: var(--white);
+    left: 0;
+    transition: transform 0.28s, top 0.28s, opacity 0.28s;
+    transform-origin: center;
+}
+
+.hamburger::before {
+    top: -8px;
+}
+
+.hamburger::after {
+    top: 8px;
+}
+
+.nav-toggle[aria-expanded="true"] .hamburger {
+    background-color: transparent;
+}
+
+.nav-toggle[aria-expanded="true"] .hamburger::before {
+    transform: rotate(45deg);
+    top: 0;
+    opacity: 1;
+}
+
+.nav-toggle[aria-expanded="true"] .hamburger::after {
+    transform: rotate(-45deg);
+    top: 0;
+    opacity: 1;
+}
+
+/* Slight relaxation so middle bar fades smoothly */
+.nav-toggle[aria-expanded="true"] .hamburger {
+    opacity: 0;
+}
+
+/* Main content styles */
+main {
+    padding: 40px 0;
+}
+
+/* Project page layout */
+.project-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+/* Utility: force media above content (stacked layout) */
+.project-grid.stack-bottom {
+    grid-template-columns: 1fr;
+}
+
+.project-media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.project-image,
+.project-video {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+/* Make project images visually consistent in size */
+.project-media .project-image {
+    width: 100%;
+    max-height: 800px; /* match the intended poster height */
+    object-fit: cover;
+    display: block;
+}
+
+@media (max-width: 1024px) {
+    .project-media .project-image { max-height: 420px; }
+}
+
+@media (max-width: 480px) {
+    .project-media .project-image { max-height: 320px; }
+}
+
+.project-content h3 {
+    margin-top: 0;
+}
+
+@media (max-width: 768px) {
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+section {
+    margin-bottom: 60px;
+    padding: 60px 0;
+    position: relative;
+}
+
+section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-pink), var(--blue), var(--purple));
+}
+
+section:nth-child(even) {
+    background: linear-gradient(135deg, var(--light-blue) 0%, rgba(255,255,255,0.8) 100%);
+}
+
+section:nth-child(odd):not(#intro) {
+    background: linear-gradient(135deg, var(--light-purple) 0%, rgba(255,255,255,0.8) 100%);
+}
+
+.container h2 {
+    color: var(--dark-pink);
+    margin-bottom: 25px;
+    font-size: 2.2rem;
+    border-bottom: 3px solid var(--primary-pink);
+    padding-bottom: 12px;
+    display: inline-block;
+}
+
+.container h3 {
+    color: var(--purple);
+    margin: 30px 0 15px;
+    font-size: 1.6rem;
+    position: relative;
+    padding-left: 15px;
+}
+
+.container h3::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 70%;
+    background: linear-gradient(to bottom, var(--blue), var(--purple));
+    border-radius: 3px;
+}
+
+.container p {
+    margin-bottom: 18px;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.container ul {
+    margin-left: 25px;
+    margin-bottom: 25px;
+}
+
+.container li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 10px;
+}
+
+.container li::before {
+    content: '▸';
+    color: var(--blue);
+    position: absolute;
+    left: -15px;
+}
+
+.container a {
+    color: var(--blue);
+    text-decoration: none;
+    transition: var(--transition);
+    font-weight: 500;
+    border-bottom: 1px solid transparent;
+}
+
+.container a:hover {
+    color: var(--purple);
+    border-bottom-color: var(--purple);
+}
+
+/* Intro section with profile picture */
+#intro {
+    background: linear-gradient(135deg, var(--secondary-pink) 0%, var(--light-blue) 100%);
+    padding: 100px 0;
+    overflow: hidden;
+    position: relative;
+}
+
+#intro::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-pink), var(--blue), var(--purple));
+}
+
+#intro .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    position: relative;
+    z-index: 1;
+}
+
+.intro-content {
+    flex: 1;
+}
+
+.intro-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+.intro-content p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.profile-container {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.profile-picture {
+    width: 470px;
+    height: 470px;
+    border-radius: 50%;
+    background-color: var(--primary-pink);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.2),
+        inset 0 0 50px rgba(255, 255, 255, 0.3);
+    border: 12px solid var(--white);
+    position: relative;
+    transition: var(--transition);
+}
+
+.profile-picture:hover {
+    transform: scale(1.03);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.25),
+        inset 0 0 60px rgba(255, 255, 255, 0.4);
+}
+
+.profile-picture::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--blue), var(--purple), var(--primary-pink));
+    z-index: -1;
+    opacity: 0.7;
+    filter: blur(15px);
+}
+
+.profile-picture-placeholder {
+    color: var(--white);
+    font-size: 5rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Actual profile photo styling */
+.profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.profile-photo:hover {
+    transform: scale(1.05);
+}
+
+/* Portfolio list styling */
+#portfolio ul {
+    list-style: none;
+    margin-left: 0;
+}
+
+#portfolio li {
+    background: linear-gradient(135deg, var(--white) 0%, var(--light-pink) 100%);
+    padding: 20px 25px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border-left: 6px solid var(--blue);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+#portfolio li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.6s;
+}
+
+#portfolio li:hover::before {
+    left: 100%;
+}
+
+#portfolio li:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-left-color: var(--purple);
+}
+
+#portfolio li a {
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: block;
+}
+
+/* Footer styles */
+.site-footer {
+    background: linear-gradient(135deg, var(--primary-pink) 0%, var(--purple) 100%);
+    color: var(--white);
+    padding: 40px 0;
+    text-align: center;
+    position: relative;
+}
+
+.site-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--primary-pink), var(--purple));
+}
+
+.site-footer p {
+    font-size: 1.1rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .profile-picture {
+        width: 380px;
+        height: 380px;
+    }
+    
+    .intro-content h2 {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-inner {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    /* Keep the toggle in-flow on small screens so it doesn't overlap the nav links.
+       This prevents the button's clickable area from sitting on top of links. */
+    .nav-toggle {
+        display: block;
+        position: static; /* no absolute positioning to avoid overlap */
+        align-self: flex-end; /* place it to the right in the column layout */
+        margin-right: 20px;
+        width: 44px;
+        height: 44px;
+        padding: 8px;
+        z-index: 1100; /* keep it above content but not above the expanded nav */
+        background: transparent;
+    }
+
+    /* Prevent the toggle from intercepting pointer events when nav is open */
+    .main-nav.active + .nav-toggle,
+    .nav-toggle[aria-expanded="true"] {
+        pointer-events: auto;
+    }
+
+    .main-nav {
+        width: 100%;
+        display: none;
+    }
+
+    /* Ensure the nav itself sits above the toggle when expanded and that links
+       are easy to tap/click (full-width). */
+    .main-nav.active {
+        display: block;
+        z-index: 1200;
+    }
+
+    .main-nav.active {
+        display: block;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        gap: 14px; /* larger gap on mobile for easier tapping */
+        margin-top: 18px;
+        padding: 0 10px; /* small horizontal padding so links don't touch screen edges */
+    }
+
+    /* Make each nav link a full-width tappable target on small screens */
+    .main-nav a {
+        display: block;
+        width: 100%;
+        padding: 14px 18px; /* increase touch area on mobile */
+        box-sizing: border-box;
+        font-size: 1.05rem;
+        letter-spacing: 0.4px;
+        text-align: left; /* align text for easier scanning */
+    }
+
+    #intro .container {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .profile-picture {
+        width: 320px;
+        height: 320px;
+    }
+    
+    .profile-picture-placeholder {
+        font-size: 4rem;
+    }
+    
+    .container h2 {
+        font-size: 1.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-title {
+        font-size: 1.5rem;
+    }
+
+    .profile-picture {
+        width: 260px;
+        height: 260px;
+    }
+
+    .profile-picture-placeholder {
+        font-size: 3.2rem;
+    }
+    
+    .container h2 {
+        font-size: 1.7rem;
+    }
+    
+    .container h3 {
+        font-size: 1.4rem;
+    }
+    
+    #intro {
+        padding: 60px 0;
+    }
+}
+
+/* Animation for page load */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+section .container {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Focus styles for accessibility */
+a:focus,
+button:focus {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+}
+
+/* Lightbox modal */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.65);
+    z-index: 2000;
+    padding: 20px;
+}
+.lightbox.active {
+    display: flex;
+}
+.lightbox-content {
+    max-width: 1100px;
+    width: 100%;
+    background: var(--white);
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+.lightbox img,
+.lightbox video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+.lightbox-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: transparent;
+    border: none;
+    color: var(--dark-pink);
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+/* Simple editor styles */
+.editor {
+    max-width: 800px;
+    margin: 30px auto;
+    background: var(--white);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+.editor label { display: block; margin-bottom: 6px; font-weight: 600; }
+.editor input[type="text"], .editor textarea { width: 100%; padding: 8px; margin-bottom: 12px; border: 1px solid #eee; border-radius: 6px; }
+.editor textarea { min-height: 140px; }
+.editor .row { display:flex; gap:12px; align-items: center; }
+.editor button { padding: 8px 12px; border-radius: 6px; background: var(--primary-pink); color: var(--white); border: none; cursor: pointer; }
+.editor .note { font-size: 0.9rem; color: #666; margin-top: 6px; }
+
+/* Debugging boundaries: toggle by adding .debug-boundaries to <body>
+   or press Ctrl+Shift+D to toggle. This visually outlines header/nav regions */
+body.debug-boundaries {
+    --dbg-color: rgba(0, 120, 215, 0.9);
+}
+
+body.debug-boundaries .site-header { outline: 3px dashed var(--dbg-color); background-image: linear-gradient(45deg, rgba(0,0,0,0.02), transparent); }
+body.debug-boundaries .header-inner { outline: 2px dashed rgba(120,0,120,0.7); }
+body.debug-boundaries .nav-toggle { outline: 2px dashed rgba(200,80,0,0.9); background: rgba(255,255,255,0.03); }
+body.debug-boundaries .main-nav { outline: 2px dashed rgba(0,180,90,0.9); }
+body.debug-boundaries .main-nav a { background: rgba(255,255,255,0.06); }
+
+/* Make debug outlines visible above page elements */
+body.debug-boundaries .site-header, body.debug-boundaries .main-nav, body.debug-boundaries .nav-toggle { z-index: 9999 !important; }

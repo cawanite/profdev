@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+  <title>Edit projects — Admin</title>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="site-title">Site editor</h1>
+      <nav class="main-nav" aria-label="Primary">
+        <ul>
+          <li><a href="main.html">Home</a></li>
+          <li><a href="about.html">About me</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <h2>Edit Projects</h2>
+
+      <div id="edit-forms">
+        <!-- JS will populate forms for project1, project2, project3 -->
+      </div>
+
+      <div class="editor note">
+        <p>Tip: store image/video files in an <code>assets/</code> folder and reference them here (e.g. <code>assets/my-photo.jpg</code>).</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 Sacha Brienesse</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Populate editor forms
+    document.addEventListener('DOMContentLoaded', function () {
+      const projects = ['project1','project2','project3'];
+      const editRoot = document.getElementById('edit-forms');
+
+      projects.forEach(key => {
+        const data = JSON.parse(localStorage.getItem(key) || '{}');
+        const form = document.createElement('form');
+        form.className = 'editor';
+        form.innerHTML = `
+          <h3>${key}</h3>
+          <label>Title</label>
+          <input type="text" name="title" value="${data.title || ''}" />
+          <label>Media URL (image or video)</label>
+          <input type="text" name="media" value="${data.media || ''}" />
+          <label>Description (HTML allowed)</label>
+          <textarea name="description">${data.description || ''}</textarea>
+          <div class="row">
+            <button type="button" data-key="${key}" class="save-btn">Save ${key}</button>
+            <button type="button" data-key="${key}" class="clear-btn">Clear ${key}</button>
+          </div>
+        `;
+        editRoot.appendChild(form);
+      });
+
+      // Save handler
+      editRoot.addEventListener('click', (e) => {
+        if (e.target.classList.contains('save-btn')) {
+          const key = e.target.dataset.key;
+          const form = e.target.closest('form');
+          const title = form.querySelector('input[name="title"]').value;
+          const media = form.querySelector('input[name="media"]').value;
+          const description = form.querySelector('textarea[name="description"]').value;
+          localStorage.setItem(key, JSON.stringify({ title, media, description }));
+          alert(key + ' saved');
+        }
+        if (e.target.classList.contains('clear-btn')) {
+          const key = e.target.dataset.key;
+          localStorage.removeItem(key);
+          alert(key + ' cleared (reload pages to see default)');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
