@@ -118,6 +118,28 @@ body {
     position: relative;
 }
 
+/* Simple nav (static buttons) */
+.simple-nav {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+}
+
+.nav-btn {
+    display: inline-block;
+    padding: 8px 18px;
+    background: rgba(255,255,255,0.08);
+    color: var(--white);
+    border-radius: 18px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+}
+.nav-btn:hover {
+    background: rgba(255,255,255,0.16);
+    transform: translateY(-2px);
+}
+
 .hamburger {
     display: block;
     width: 25px;
@@ -385,6 +407,41 @@ section:nth-child(odd):not(#intro) {
     transition: var(--transition);
 }
 
+/* square variant for about page */
+.profile-picture.square {
+    border-radius: 8px; /* square with slight rounding */
+    border: 6px solid var(--white); /* simple white border */
+    background: transparent; /* remove pink background */
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12); /* gentle outer shadow only */
+    width: 400px;
+    height: 400px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* hide the decorative pseudo-element used for circular glow */
+.profile-picture.square::before { display: none; }
+
+.profile-picture.square .profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 6px; /* small corner rounding inside the bordered container */
+}
+
+@media (max-width: 1024px) {
+    .profile-picture.square { width: 320px; height: 320px; }
+}
+
+@media (max-width: 768px) {
+    .profile-picture.square { width: 260px; height: 260px; }
+}
+
+@media (max-width: 480px) {
+    .profile-picture.square { width: 220px; height: 220px; }
+}
+
 .profile-picture:hover {
     transform: scale(1.03);
     box-shadow: 
@@ -516,17 +573,8 @@ section:nth-child(odd):not(#intro) {
 
     /* Keep the toggle in-flow on small screens so it doesn't overlap the nav links.
        This prevents the button's clickable area from sitting on top of links. */
-    .nav-toggle {
-        display: block;
-        position: static; /* no absolute positioning to avoid overlap */
-        align-self: flex-end; /* place it to the right in the column layout */
-        margin-right: 20px;
-        width: 44px;
-        height: 44px;
-        padding: 8px;
-        z-index: 1100; /* keep it above content but not above the expanded nav */
-        background: transparent;
-    }
+    /* hide any hamburger leftover since we now use static buttons */
+    .nav-toggle { display: none !important; }
 
     /* Prevent the toggle from intercepting pointer events when nav is open */
     .main-nav.active + .nav-toggle,
@@ -567,6 +615,10 @@ section:nth-child(odd):not(#intro) {
         letter-spacing: 0.4px;
         text-align: left; /* align text for easier scanning */
     }
+
+    /* simple-nav stacks on small screens for better readability */
+    .simple-nav { flex-direction: column; gap: 10px; }
+    .nav-btn { width: 100%; padding: 12px 18px; border-radius: 10px; text-align: center; }
 
     #intro .container {
         flex-direction: column;
